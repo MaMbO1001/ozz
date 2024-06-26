@@ -1,0 +1,40 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+# Тип для представления поста
+type Post {
+    id: ID!
+    title: String!
+    content: String!
+    authorId: ID!
+    comments: [Comment!]!
+    commentsAllowed: Boolean!
+}
+
+# Тип для представления комментария
+type Comment {
+    id: ID!
+    postId: ID!
+    content: String!
+    authorId: ID!
+    parentCommentId: ID
+    childComments: [Comment!]!
+}
+
+# Запросы (Queries) для получения данных
+type Query {
+    posts: [Post!]!
+    post(id: ID!): Post
+}
+
+# Мутации (Mutations) для изменения данных
+type Mutation {
+    createPost(title: String!, content: String!, authorId: ID!, commentsAllowed: Boolean!): Post!
+    createComment(postId: ID!, content: String!, authorId: ID!, parentCommentId: ID): Comment!
+}
+
+# Подписки для асинхронного получения новых комментариев
+type Subscription {
+    commentAdded(postId: ID!): Comment!
+}
