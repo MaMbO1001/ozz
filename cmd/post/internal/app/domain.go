@@ -7,7 +7,6 @@ type Post struct {
 	UserID     int
 	Text       string
 	CreatedAt  time.Time
-	Comments   []Comment
 	BanComment bool
 }
 
